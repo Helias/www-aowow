@@ -1,0 +1,17 @@
+name: docker-setup
+on:
+  workflow_dispatch:
+
+jobs:
+  docker-setup:
+    permissions: write-all
+    runs-on: ubuntu-22.04
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: "run docker"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          docker compose up
