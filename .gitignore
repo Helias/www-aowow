@@ -5,6 +5,8 @@
 /cache/template/*
 /cache/alphaMaps/*
 /cache/setup/*
+/cache/Artworks/*
+/cache/alphaMaps/*
 
 # extract from MPQ
 /setup/mpqdata/*

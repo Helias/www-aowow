@@ -1,0 +1,8 @@
+FROM php:8.2-apache
+
+ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
+
+RUN chmod +x /usr/local/bin/install-php-extensions; \
+    install-php-extensions gd mysqli mbstring xml
+
+RUN apt-get update -y && apt-get install -y p7zip p7zip-full wget default-mysql-client unzip

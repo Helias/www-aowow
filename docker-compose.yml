@@ -1,0 +1,49 @@
+networks:
+  aowow_network:
+
+services:
+  aowow-database:
+    container_name: aowow-database
+    image: mysql:8.0.41-debian
+    # restart: unless-stopped
+    cap_add:
+      - SYS_NICE # CAP_SYS_NICE
+    ports:
+      - ${DOCKER_DB_EXTERNAL_PORT:-63306}:3306
+    expose:
+      - 3306
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: aowow
+    networks:
+      - aowow_network
+    volumes:
+      - aowow-database:/var/lib/mysql
+    healthcheck:
+      test: "/usr/bin/mysql --user=root --password=$$MYSQL_ROOT_PASSWORD --execute \"SHOW DATABASES;\""
+      interval: 5s
+      timeout: 10s
+      retries: 40
+
+  aowow-web:
+    image: aowow-web
+    container_name: aowow_php
+    tty: true
+    build:
+      context: .
+      dockerfile: setup/scripts/Dockerfile.aowow_php
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www/html
+      - ./setup/scripts/init-docker-db.sh:/docker-entrypoint-initdb.d/init-docker-db.sh
+    entrypoint: ["/bin/bash", "/docker-entrypoint-initdb.d/init-docker-db.sh"]
+    # restart: always
+    networks:
+      - aowow_network
+    depends_on:
+      aowow-database:
+        condition: service_healthy
+
+volumes:
+  aowow-database:

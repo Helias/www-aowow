@@ -44,7 +44,7 @@ class Lang
     private static $emote;
     private static $enchantment;
 
-    private static ?Locale $locale = null;
+    private static ?Locale $locale = Locale::EN;
 
     public const FMT_RAW    = 0;
     public const FMT_HTML   = 1;
