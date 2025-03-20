@@ -25,6 +25,7 @@ mysql -u root -ppassword -h aowow-database aowow < setup/db_structure.sql
 mysql -u root -ppassword -h aowow-database aowow -e "SET GLOBAL range_optimizer_max_mem_size=0;"
 mysql -u root -ppassword -h aowow-database aowow -e "UPDATE aowow_config SET value='127.0.0.1:80' WHERE \`key\`='site_host';"
 mysql -u root -ppassword -h aowow-database aowow -e "UPDATE aowow_config SET value='127.0.0.1:80/static' WHERE \`key\`='static_host';"
+mysql -u root -ppassword -h aowow-database aowow -e "UPDATE aowow_config SET value='3' WHERE \`key\`='debug';"
 
 cd /var/www/html/
 
