@@ -72,11 +72,13 @@ if (!defined('AOWOW_REVISION'))
 " > config/config.php
 
 mkdir -p setup/mpqdata/enus/DBFilesClient/
-
 wget https://github.com/wowgaming/client-data/releases/download/v16/data.zip
 unzip data.zip "dbc/*" -d ./
 mv dbc/* "setup/mpqdata/enus/DBFilesClient/"
 rm data.zip
+
+mkdir -p setup/mpqdata/interface/framexml/
+wget https://raw.githubusercontent.com/wowgaming/3.3.5-interface-files/refs/heads/main/GlobalStrings.lua -O setup/mpqdata/interface/framexml/globalstrings.lua
 
 php aowow --sql
 
