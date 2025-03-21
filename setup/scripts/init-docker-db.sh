@@ -26,6 +26,7 @@ mysql -u root -ppassword -h aowow-database aowow -e "SET GLOBAL range_optimizer_
 mysql -u root -ppassword -h aowow-database aowow -e "UPDATE aowow_config SET value='127.0.0.1:80' WHERE \`key\`='site_host';"
 mysql -u root -ppassword -h aowow-database aowow -e "UPDATE aowow_config SET value='127.0.0.1:80/static' WHERE \`key\`='static_host';"
 mysql -u root -ppassword -h aowow-database aowow -e "UPDATE aowow_config SET value='3' WHERE \`key\`='debug';"
+mysql -u root -ppassword -h aowow-database aowow -e "UPDATE aowow_config SET value='1' WHERE \`key\`='locales';" # EN locale
 
 cd /var/www/html/
 
@@ -79,6 +80,9 @@ rm data.zip
 
 mkdir -p setup/mpqdata/interface/framexml/
 wget https://raw.githubusercontent.com/wowgaming/3.3.5-interface-files/refs/heads/main/GlobalStrings.lua -O setup/mpqdata/interface/framexml/globalstrings.lua
+
+mkdir -p setup/mpqdata/enUS/interface/framexml/
+cp setup/mpqdata/interface/framexml/globalstrings.lua setup/mpqdata/enUS/interface/framexml/globalstrings.lua
 
 php aowow --sql
 
