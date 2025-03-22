@@ -34,7 +34,7 @@ jobs:
           sudo systemctl status mysql
 
       - name: Test MySQL connection
-        run: sudo mysql -h 127.0.0.1 -u root -pPASSWORD -e "SHOW DATABASES;"
+        run: sudo mysql -h 127.0.0.1 -u root -e "SHOW DATABASES;"
 
       - name: Run your tests or scripts
         run: |
