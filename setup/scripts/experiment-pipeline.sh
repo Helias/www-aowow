@@ -85,6 +85,12 @@ wget https://raw.githubusercontent.com/wowgaming/3.3.5-interface-files/refs/head
 mkdir -p setup/mpqdata/enUS/interface/framexml/
 cp setup/mpqdata/interface/framexml/globalstrings.lua setup/mpqdata/enUS/interface/framexml/globalstrings.lua
 
+php -m | grep intl
+sudo phpdismod intl
+sudo systemctl restart apache2 || true
+php -m | grep intl
+
+
 php aowow --sql
 
 mysqldump -u root -proot aowow > aowow_data.sql
