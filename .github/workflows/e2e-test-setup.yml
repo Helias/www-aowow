@@ -31,6 +31,10 @@ jobs:
           sudo /etc/init.d/mysql start
           sudo mysql -u$DB_USER -p$DB_PASSWORD -e "SHOW DATABASES;"
 
+      - name: Run script
+        run: |
+          bash ./setup/scripts/experiment-pipeline.sh:
+
       - name: Run your tests or scripts
         run: |
           # Run any tests or scripts here
