@@ -9,6 +9,10 @@ on:
 jobs:
   setup:
     runs-on: ubuntu-24.04
+    env:
+      DB_DATABASE: aowow
+      DB_USER: root
+      DB_PASSWORD: root
 
     steps:
       - name: Checkout repository
@@ -22,19 +26,8 @@ jobs:
           sudo systemctl start apache2
           sudo systemctl status apache2
 
-      - name: Set up MySQL
-        run: |
-          sudo apt-get install -y mysql-server mysql-client
-          sudo systemctl enable mysql
-          sudo systemctl start mysql
-          sudo systemctl status mysql
-          sudo systemctl stop mysql
-          sudo mysqld_safe --skip-grant-tables &
-          sudo systemctl start mysql
-          sudo systemctl status mysql
-
       - name: Test MySQL connection
-        run: sudo mysql -u root -e "SHOW DATABASES;"
+        run: sudo mysql -u$DB_USER -p$DB_PASSWORD -e "SHOW DATABASES;"
 
       - name: Run your tests or scripts
         run: |
