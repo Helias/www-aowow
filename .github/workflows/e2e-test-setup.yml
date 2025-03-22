@@ -6,6 +6,9 @@ on:
     branches:
       - docker-setup
 
+permissions:
+  contents: write
+
 jobs:
   setup:
     runs-on: ubuntu-24.04
