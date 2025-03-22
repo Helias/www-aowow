@@ -29,7 +29,7 @@ mysql -u root -proot aowow -e "UPDATE aowow_config SET value='127.0.0.1:80/stati
 mysql -u root -proot aowow -e "UPDATE aowow_config SET value='3' WHERE \`key\`='debug';"
 mysql -u root -proot aowow -e "UPDATE aowow_config SET value='1' WHERE \`key\`='locales';" # EN locale
 
-cd /var/www/html/
+# cd /var/www/html/
 
 echo "
 <?php
@@ -86,5 +86,9 @@ mkdir -p setup/mpqdata/enUS/interface/framexml/
 cp setup/mpqdata/interface/framexml/globalstrings.lua setup/mpqdata/enUS/interface/framexml/globalstrings.lua
 
 php aowow --sql
+
+mysqldump -u root -proot aowow > aowow_data.sql
+mysqldump -u root -proot trinitycore_world > trinitycore_world.sql
+zip aowow_db.sql.zip aowow_data.sql trinitycore_world.sql
 
 # apache2-foreground

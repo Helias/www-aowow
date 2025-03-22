@@ -6,8 +6,8 @@ on:
     branches:
       - docker-setup
 
-permissions:
-  contents: write
+# permissions:
+#   contents: write
 
 jobs:
   setup:
@@ -42,3 +42,9 @@ jobs:
         run: |
           # Run any tests or scripts here
           echo "Test command or script goes here"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: aowow_db
+          path: ${{ github.workspace }}/aowow_db.sql.zip
+          retention-days: 30
