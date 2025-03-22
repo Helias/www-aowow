@@ -27,7 +27,9 @@ jobs:
           sudo systemctl status apache2
 
       - name: Test MySQL connection
-        run: sudo mysql -u$DB_USER -p$DB_PASSWORD -e "SHOW DATABASES;"
+        run: |
+          sudo /etc/init.d/mysql start
+          sudo mysql -u$DB_USER -p$DB_PASSWORD -e "SHOW DATABASES;"
 
       - name: Run your tests or scripts
         run: |
