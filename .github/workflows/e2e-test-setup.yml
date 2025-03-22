@@ -2,19 +2,13 @@ name: e2e-test-setup
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - docker-setup
 
 jobs:
   setup:
-    runs-on: ubuntu-latest
-
-    services:
-      mysql:
-        image: mysql:8.0.41-debian
-        ports:
-          - 3306:3306
-        environment:
-          MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: aowow
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout repository
@@ -28,8 +22,8 @@ jobs:
           sudo systemctl start apache2
           sudo systemctl status apache2
 
-      - name: Set up MySQL client
-        run: sudo apt install -y mysql-client
+      - name: Set up MySQL
+        run: sudo apt install -y mysql-server mysql-client
 
       - name: Test MySQL connection
         run: mysql -h 127.0.0.1 -u root -p${{ secrets.MYSQL_ROOT_PASSWORD }} -e "SHOW DATABASES;"
