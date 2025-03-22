@@ -28,6 +28,10 @@ jobs:
           sudo systemctl enable mysql
           sudo systemctl start mysql
           sudo systemctl status mysql
+          sudo systemctl stop mysql
+          sudo mysqld_safe --skip-grant-tables &
+          sudo systemctl start mysql
+          sudo systemctl status mysql
 
       - name: Test MySQL connection
         run: sudo mysql -h 127.0.0.1 -u root -pPASSWORD -e "SHOW DATABASES;"
