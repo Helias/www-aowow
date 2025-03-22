@@ -1,0 +1,38 @@
+name: e2e-test-setup
+
+on:
+  workflow_dispatch:
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.3
+        options: --env MYSQL_ROOT_PASSWORD=root_password --env MYSQL_DATABASE=testdb --port 3306
+        ports:
+          - 3306:3306
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Apache
+        run: |
+          sudo apt update
+          sudo apt install -y apache2
+          sudo systemctl enable apache2
+          sudo systemctl start apache2
+          sudo systemctl status apache2
+
+      - name: Set up MySQL client
+        run: sudo apt install -y mysql-client
+
+      - name: Test MySQL connection
+        run: mysql -h 127.0.0.1 -u root -p${{ secrets.MYSQL_ROOT_PASSWORD }} -e "SHOW DATABASES;"
+
+      - name: Run your tests or scripts
+        run: |
+          # Run any tests or scripts here
+          echo "Test command or script goes here"
