@@ -33,7 +33,7 @@ jobs:
 
       - name: Run script
         run: |
-          bash ./setup/scripts/experiment-pipeline.sh:
+          bash ./setup/scripts/experiment-pipeline.sh
 
       - name: Run your tests or scripts
         run: |
