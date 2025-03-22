@@ -23,7 +23,11 @@ jobs:
           sudo systemctl status apache2
 
       - name: Set up MySQL
-        run: sudo apt install -y mysql-server mysql-client
+        run: |
+          sudo apt install -y mysql-server mysql-client
+          sudo systemctl enable mysql
+          sudo systemctl start mysql
+          sudo systemctl status mysql
 
       - name: Test MySQL connection
         run: mysql -h 127.0.0.1 -u root -p${{ secrets.MYSQL_ROOT_PASSWORD }} -e "SHOW DATABASES;"
