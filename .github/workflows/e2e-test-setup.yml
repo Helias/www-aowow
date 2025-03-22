@@ -10,9 +10,11 @@ jobs:
     services:
       mysql:
         image: mysql:8.0.41-debian
-        options: --env MYSQL_ROOT_PASSWORD=root_password --env MYSQL_DATABASE=testdb --port 3306
         ports:
           - 3306:3306
+        environment:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: aowow
 
     steps:
       - name: Checkout repository
