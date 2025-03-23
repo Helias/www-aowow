@@ -105,4 +105,5 @@ mysql -u root -proot aowow -e "UPDATE aowow_config SET value='0' WHERE \`key\`='
 # mysqldump -u root -proot trinitycore_world > trinitycore_world.sql
 # zip aowow_db.sql.zip aowow_data.sql trinitycore_world.sql
 
+mysql -u root -proot aowow -e "UPDATE aowow_config SET value='0' WHERE \`key\`='debug';"
 # apache2-foreground
