@@ -91,10 +91,18 @@ sudo systemctl restart apache2 || true
 php -m | grep intl
 
 
-php aowow --sql
+# php aowow --sql
+unzip aowow_db.zip
+unzip aowow_db.sql.zip
+mysql -u root -proot trinitycore_world < "trinitycore_world.sql"
+mysql -u root -proot aowow < "aowow_data.sql"
 
-mysqldump -u root -proot aowow > aowow_data.sql
-mysqldump -u root -proot trinitycore_world > trinitycore_world.sql
-zip aowow_db.sql.zip aowow_data.sql trinitycore_world.sql
+php aowow --build=demo,gems,glyphs,enchants,itemscaling,itemsets,locales,markup,pets,profiler,realmmenu,realms,searchbox,searchplugin,statistics,talentcalc,tooltips,weightpresets
+
+mysql -u root -proot aowow -e "UPDATE aowow_config SET value='0' WHERE \`key\`='maintenance';"
+
+# mysqldump -u root -proot aowow > aowow_data.sql
+# mysqldump -u root -proot trinitycore_world > trinitycore_world.sql
+# zip aowow_db.sql.zip aowow_data.sql trinitycore_world.sql
 
 # apache2-foreground
