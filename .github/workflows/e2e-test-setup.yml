@@ -31,7 +31,7 @@ jobs:
         run: |
           sudo systemctl stop apache2
           cp setup/scripts/route.php route.php
-          php -S 127.0.0.1:80 route.php
+          sudo php -S 127.0.0.1:80 route.php
 
       - uses: karol-brejna-i/webpage-screenshot-action@v1
         with:
