@@ -36,7 +36,18 @@ jobs:
       - uses: karol-brejna-i/webpage-screenshot-action@v1
         with:
           url: http://127.0.0.1/?npc=123
-          output: example.png
+          output: npc-123-Riverpaw-Mongrel.png
+
+      - uses: karol-brejna-i/webpage-screenshot-action@v1
+        with:
+          url: http://127.0.0.1/?npc=28701#teaches
+          output: npc-28701-Timothy-Jones.png
+
+
+      - uses: karol-brejna-i/webpage-screenshot-action@v1
+        with:
+          url: http://127.0.0.1/?item=51432
+          output: item-51432-Wrathful-Gladiator-Greatstaff.png
 
       - uses: actions/upload-artifact@v4
         with:
