@@ -27,8 +27,9 @@ jobs:
         run: |
           bash ./setup/scripts/experiment-pipeline.sh
 
-      - name: Run your tests or scripts
+      - name: Run weba pp
         run: |
+          sudo systemctl stop apache2
           cp setup/scripts/route.php route.php
           php -S 127.0.0.1:80 route.php &>/dev/null &
 
