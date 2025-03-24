@@ -1,5 +1,7 @@
 FROM ubuntu:24.04
 
+WORKDIR  /aowow/
+
 ENV DB_DATABASE=aowow
 ENV DB_USER=root
 ENV DB_PASSWORD=root
