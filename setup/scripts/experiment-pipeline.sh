@@ -1,4 +1,3 @@
-# download and import TDB
 wget https://github.com/TrinityCore/TrinityCore/releases/download/TDB335.21101/TDB_full_world_335.21101_2021_10_15.7z
 7z x TDB_full_world_335.21101_2021_10_15.7z
 rm TDB_full_world_335.21101_2021_10_15.7z
@@ -28,8 +27,6 @@ mysql -u root -proot aowow -e "UPDATE aowow_config SET value='127.0.0.1:80' WHER
 mysql -u root -proot aowow -e "UPDATE aowow_config SET value='127.0.0.1:80/static' WHERE \`key\`='static_host';"
 mysql -u root -proot aowow -e "UPDATE aowow_config SET value='3' WHERE \`key\`='debug';"
 mysql -u root -proot aowow -e "UPDATE aowow_config SET value='1' WHERE \`key\`='locales';" # EN locale
-
-# cd /var/www/html/
 
 echo "
 <?php
@@ -86,24 +83,21 @@ mkdir -p setup/mpqdata/enUS/interface/framexml/
 cp setup/mpqdata/interface/framexml/globalstrings.lua setup/mpqdata/enUS/interface/framexml/globalstrings.lua
 
 php -m | grep intl
-sudo phpdismod intl
-sudo systemctl restart apache2 || true
+phpdismod intl
+status apache2 restart
 php -m | grep intl
 
-
-# php aowow --sql
-unzip aowow_db.zip
-unzip aowow_db.sql.zip
-mysql -u root -proot trinitycore_world < "trinitycore_world.sql"
-mysql -u root -proot aowow < "aowow_data.sql"
-
+php aowow --sql
 php aowow --build=demo,gems,glyphs,enchants,itemscaling,itemsets,locales,markup,pets,profiler,realmmenu,realms,searchbox,searchplugin,statistics,talentcalc,tooltips,weightpresets
 
+# unzip aowow_db.zip
+# unzip aowow_db.sql.zip
+# mysql -u root -proot trinitycore_world < "trinitycore_world.sql"
+# mysql -u root -proot aowow < "aowow_data.sql"
+
 mysql -u root -proot aowow -e "UPDATE aowow_config SET value='0' WHERE \`key\`='maintenance';"
-
-# mysqldump -u root -proot aowow > aowow_data.sql
-# mysqldump -u root -proot trinitycore_world > trinitycore_world.sql
-# zip aowow_db.sql.zip aowow_data.sql trinitycore_world.sql
-
 mysql -u root -proot aowow -e "UPDATE aowow_config SET value='0' WHERE \`key\`='debug';"
-# apache2-foreground
+
+echo "[mysqld]" >> /etc/mysql/my.cnf
+echo "skip-grant-tables" >> /etc/mysql/my.cnf
+echo "skip-networking" >> /etc/mysql/my.cnf
