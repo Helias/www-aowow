@@ -101,6 +101,8 @@ echo "skip-networking" >> /etc/mysql/my.cnf
 
 service mysql restart
 
+mysql -u root -proot aowow -e "SET GLOBAL range_optimizer_max_mem_size=0;"
+
 echo "Starts php aowow --sql"
 php aowow --sql
 
