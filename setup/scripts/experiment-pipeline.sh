@@ -89,11 +89,6 @@ php -m | grep intl
 phpdismod intl
 php -m | grep intl
 
-unzip aowow_db.zip
-unzip aowow_db.sql.zip
-mysql -u root -proot trinitycore_world < "trinitycore_world.sql"
-mysql -u root -proot aowow < "aowow_data.sql"
-
 echo "[mysqld]" >> /etc/mysql/my.cnf
 echo "skip-grant-tables" >> /etc/mysql/my.cnf
 echo "skip-networking" >> /etc/mysql/my.cnf
@@ -102,11 +97,11 @@ service mysql restart
 
 mysql -u root -proot aowow -e "SET GLOBAL range_optimizer_max_mem_size=0;"
 
-# echo "Starts php aowow --sql"
-# php aowow --sql
+echo "Starts php aowow --sql"
+php aowow --sql
 
-# echo "Starts php aowow --build"
-# php aowow --build=demo,gems,glyphs,enchants,itemscaling,itemsets,locales,markup,pets,profiler,realmmenu,realms,searchbox,searchplugin,statistics,talentcalc,tooltips,weightpresets
+echo "Starts php aowow --build"
+php aowow --build=demo,gems,glyphs,enchants,itemscaling,itemsets,locales,markup,pets,profiler,realmmenu,realms,searchbox,searchplugin,statistics,talentcalc,tooltips,weightpresets
 
 mysql -u root -proot aowow -e "UPDATE aowow_config SET value='0' WHERE \`key\`='maintenance';"
 mysql -u root -proot aowow -e "UPDATE aowow_config SET value='0' WHERE \`key\`='debug';"
