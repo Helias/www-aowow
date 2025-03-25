@@ -2,9 +2,9 @@ name: e2e-test-setup
 
 on:
   workflow_dispatch:
-  # push:
-  #   branches:
-  #     - docker-setup
+  push:
+    branches:
+      - docker-setup
 
 jobs:
   setup:
@@ -24,10 +24,9 @@ jobs:
           sudo mysql -u$DB_USER -p$DB_PASSWORD -e "SHOW DATABASES;"
 
       - name: Run script
-        run: |
-          bash ./setup/scripts/experiment-pipeline.sh
+        run: sudo bash ./setup/scripts/experiment-pipeline.sh
 
-      - name: Run weba pp
+      - name: Run web app
         run: |
           sudo systemctl stop apache2
           cp setup/scripts/route.php route.php
