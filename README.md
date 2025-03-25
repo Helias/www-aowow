@@ -24,10 +24,15 @@ docker pull ghcr.io/sarjuuk/aowow:master
 docker run --name aowow-docker -p 80:80 2d6d03688f4c
 ```
 
-Keep in mind that:
-- the docker image does not include the WoW images, so when the browser will visit AoWoW it will rely on wowgaming.altervista.org and it will be slow
-- the docker image is more for development purposes not for production
-- the database could not be updated at the latest version
+Now you can visit http://127.0.0.1 and explore AoWoW!
+
+> [!WARNING]  
+> If you're running Nginx or Apache2 (e.g., via XAMPP) locally, these services will occupy port 80, preventing AoWoW from running. Stop them before starting the Docker container.
+
+Things to keep in mind:
+- To speed up installation and reduce the Docker image size, WoW images are not included. When accessing AoWoW, images will be loaded from wowgaming.altervista.org, which may result in slower performance.
+- This Docker image is intended for development rather than production use.
+- The database may not be up to date with the latest version.
 
 ## How to install and run manually
 
