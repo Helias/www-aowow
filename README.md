@@ -15,8 +15,23 @@ This is a complete rewrite of the serverside php code and update to the clientsi
 I myself take no credit for the clientside scripting, design and layout that these php-scripts cater to.
 Also, this project is not meant to be used for commercial puposes of any kind!
 
+## How to run using Docker
 
-## Requirements
+You can easily run AoWoW locally downloading and running the docker image with the following commands:
+
+```bash
+docker pull ghcr.io/sarjuuk/aowow:master
+docker run --name aowow-docker -p 80:80 2d6d03688f4c
+```
+
+Keep in mind that:
+- the docker image does not include the WoW images, so when the browser will visit AoWoW it will rely on wowgaming.altervista.org and it will be slow
+- the docker image is more for development purposes not for production
+- the database could not be updated at the latest version
+
+## How to install and run manually
+
+### Requirements
 
 + Webserver running PHP ≥ 8.2 including extensions:
   + [SimpleXML](https://www.php.net/manual/en/book.simplexml.php)
