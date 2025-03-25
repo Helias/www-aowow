@@ -1,5 +1,5 @@
 wget https://github.com/TrinityCore/TrinityCore/releases/download/TDB335.21101/TDB_full_world_335.21101_2021_10_15.7z
-7z x TDB_full_world_335.21101_2021_10_15.7z
+7z x TDB_full_world_335.21101_2021_10_15.7z  >> /dev/null
 rm TDB_full_world_335.21101_2021_10_15.7z
 
 echo "creating trinitycore_world db"
@@ -72,7 +72,7 @@ if (!defined('AOWOW_REVISION'))
 
 mkdir -p setup/mpqdata/enus/DBFilesClient/
 wget https://github.com/wowgaming/client-data/releases/download/v16/data.zip
-unzip data.zip "dbc/*" -d ./
+unzip data.zip "dbc/*" -d ./ >> /dev/null
 mv dbc/* "setup/mpqdata/enus/DBFilesClient/"
 rm data.zip
 
@@ -87,7 +87,10 @@ phpdismod intl
 service apache2 restart
 php -m | grep intl
 
+echo "Starts php aowow --sql"
 php aowow --sql
+
+echo "Starts php aowow --build"
 php aowow --build=demo,gems,glyphs,enchants,itemscaling,itemsets,locales,markup,pets,profiler,realmmenu,realms,searchbox,searchplugin,statistics,talentcalc,tooltips,weightpresets
 
 # unzip aowow_db.zip
