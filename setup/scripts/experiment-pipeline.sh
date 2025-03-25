@@ -1,4 +1,5 @@
-wget https://github.com/TrinityCore/TrinityCore/releases/download/TDB335.21101/TDB_full_world_335.21101_2021_10_15.7z
+echo "Downloading and importing DB"
+wget https://github.com/TrinityCore/TrinityCore/releases/download/TDB335.21101/TDB_full_world_335.21101_2021_10_15.7z > /dev/null 2>&1
 7z x TDB_full_world_335.21101_2021_10_15.7z  > /dev/null 2>&1
 rm TDB_full_world_335.21101_2021_10_15.7z
 
@@ -7,8 +8,8 @@ mysql -u root -proot -e "CREATE DATABASE trinitycore_world;"
 mysql -u root -proot -e "CREATE DATABASE trinitycore_auth;"
 mysql -u root -proot -e "CREATE DATABASE trinitycore_characters;"
 
-wget https://raw.githubusercontent.com/TrinityCore/TrinityCore/refs/heads/3.3.5/sql/base/auth_database.sql
-wget https://raw.githubusercontent.com/TrinityCore/TrinityCore/refs/heads/3.3.5/sql/base/characters_database.sql
+wget https://raw.githubusercontent.com/TrinityCore/TrinityCore/refs/heads/3.3.5/sql/base/auth_database.sql > /dev/null 2>&1
+wget https://raw.githubusercontent.com/TrinityCore/TrinityCore/refs/heads/3.3.5/sql/base/characters_database.sql > /dev/null 2>&1
 mysql -u root -proot trinitycore_auth < "auth_database.sql"
 mysql -u root -proot trinitycore_characters < "characters_database.sql"
 rm auth_database.sql
@@ -19,6 +20,7 @@ mysql -u root -proot trinitycore_world < "TDB_full_world_335.21101_2021_10_15.sq
 echo "TDB imported"
 rm TDB_full_world_335.21101_2021_10_15.sql
 
+echo "Creating aowow DB"
 mysql -u root -proot -e "CREATE DATABASE aowow;"
 mysql -u root -proot aowow < setup/db_structure.sql
 
@@ -70,8 +72,9 @@ if (!defined('AOWOW_REVISION'))
 ?>
 " > config/config.php
 
+echo "Downloading data"
 mkdir -p setup/mpqdata/enus/DBFilesClient/
-wget https://github.com/wowgaming/client-data/releases/download/v16/data.zip
+wget https://github.com/wowgaming/client-data/releases/download/v16/data.zip > /dev/null 2>&1
 unzip data.zip "dbc/*" -d ./ > /dev/null 2>&1
 mv dbc/* "setup/mpqdata/enus/DBFilesClient/"
 rm data.zip
