@@ -20,7 +20,7 @@ RUN service mysql start && \
 sleep 5 && \
 mysql -e "CREATE DATABASE $DB_DATABASE;" && \
 mysql -e "SHOW DATABASES;" && \
-bash ./setup/scripts/experiment-pipeline.sh
+bash ./setup/scripts/docker-pipeline.sh
 
 RUN service mysql restart
 
