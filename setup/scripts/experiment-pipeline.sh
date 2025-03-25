@@ -87,20 +87,22 @@ phpdismod intl
 service apache2 restart
 php -m | grep intl
 
+# unzip aowow_db.zip
+# unzip aowow_db.sql.zip
+# mysql -u root -proot trinitycore_world < "trinitycore_world.sql"
+# mysql -u root -proot aowow < "aowow_data.sql"
+
+echo "[mysqld]" >> /etc/mysql/my.cnf
+echo "skip-grant-tables" >> /etc/mysql/my.cnf
+echo "skip-networking" >> /etc/mysql/my.cnf
+
+service mysql restart
+
 echo "Starts php aowow --sql"
 php aowow --sql
 
 echo "Starts php aowow --build"
 php aowow --build=demo,gems,glyphs,enchants,itemscaling,itemsets,locales,markup,pets,profiler,realmmenu,realms,searchbox,searchplugin,statistics,talentcalc,tooltips,weightpresets
 
-# unzip aowow_db.zip
-# unzip aowow_db.sql.zip
-# mysql -u root -proot trinitycore_world < "trinitycore_world.sql"
-# mysql -u root -proot aowow < "aowow_data.sql"
-
 mysql -u root -proot aowow -e "UPDATE aowow_config SET value='0' WHERE \`key\`='maintenance';"
 mysql -u root -proot aowow -e "UPDATE aowow_config SET value='0' WHERE \`key\`='debug';"
-
-echo "[mysqld]" >> /etc/mysql/my.cnf
-echo "skip-grant-tables" >> /etc/mysql/my.cnf
-echo "skip-networking" >> /etc/mysql/my.cnf
