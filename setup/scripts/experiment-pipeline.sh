@@ -84,7 +84,7 @@ cp setup/mpqdata/interface/framexml/globalstrings.lua setup/mpqdata/enUS/interfa
 
 php -m | grep intl
 phpdismod intl
-status apache2 restart
+service apache2 restart
 php -m | grep intl
 
 php aowow --sql
